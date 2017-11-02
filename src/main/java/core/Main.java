@@ -44,10 +44,11 @@ public class Main extends SpringBootServletInitializer
     public void onStartup(ServletContext servletContext) throws ServletException {
         if (initialized) return;
         initialized = true;
-        ServletRegistration.Dynamic servlet = servletContext.addServlet("Vaadin", new VServlet());
+        ServletRegistration.Dynamic servlet = servletContext.addServlet("Vaadin", VServlet.class);
 
         servlet.setInitParameter("UI", "ui.MyVaadinUI");
-        servlet.addMapping("/VAADIN/*", "/ui", "/ui/*");
+        servlet.setInitParameter("widgetset", "WidgetSet");
+        servlet.addMapping("/VAADIN/*", "/", "/*");
         servlet.setAsyncSupported(true);
 
         Enumeration<String> initParameterNames = servletContext.getInitParameterNames();

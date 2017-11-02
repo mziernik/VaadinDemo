@@ -16,8 +16,9 @@
     </facet>
     <facet type="gwt" name="GWT">
       <configuration>
-        <setting name="additionalCompilerParameters" value="-Xss1024k" />
-        <setting name="compilerMaxHeapSize" value="2048" />
+        <setting name="additionalCompilerParameters" value="-Xss1024k -Dgwt.persistentunitcachedir=W:\VaadinDemo/target/tmp/gwt-unitCache" />
+        <setting name="compilerParameters" value="-compileReport" />
+        <setting name="compilerMaxHeapSize" value="512" />
         <setting name="gwtSdkUrl" value="file://C:\Users\milosz\.m2\repository/com/vaadin/vaadin-client/7.7.11" />
         <setting name="gwtSdkType" value="Vaadin-Maven" />
         <setting name="webFacet" value="Web" />

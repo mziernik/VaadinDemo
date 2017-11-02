@@ -61,6 +61,19 @@
         </pluginRepository>
     </pluginRepositories>
 
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.vaadin</groupId>
+                <artifactId>vaadin-bom</artifactId>
+                <version>${vaadin.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
 
         <dependency>
@@ -153,21 +166,31 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>com.vaadin</groupId>-->
-            <!--<artifactId>vaadin-compatibility-server</artifactId>-->
-            <!--<version>${vaadin.version}</version>-->
+        <!--<groupId>com.vaadin</groupId>-->
+        <!--<artifactId>vaadin-compatibility-server</artifactId>-->
+        <!--<version>${vaadin.version}</version>-->
         <!--</dependency>-->
 
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-server</artifactId>
             <version>${vaadin.version}</version>
+
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-server</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-client-compiled</artifactId>
             <version>${vaadin.version}</version>
+            <!-- <scope>provided</scope> -->
         </dependency>
+
         <dependency>
             <groupId>com.vaadin</groupId>
             <artifactId>vaadin-client</artifactId>
@@ -250,10 +273,22 @@
                 <artifactId>vaadin-maven-plugin</artifactId>
                 <version>${vaadin.version}</version>
                 <configuration>
-                    <extraJvmArgs>-Xmx2G -Xss1024k</extraJvmArgs>
+                    <extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
+                    <webappDirectory>${basedir}/src/main/webapp/VAADIN/widgetsets</webappDirectory>
+                    <hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets</hostedWebapp>
+                    <noServer>true</noServer>
+                    <persistentunitcachedir>${basedir}/target/tmp/gwt-unitCache</persistentunitcachedir>
+                    <compileReport>true</compileReport>
+                    <runTarget>http://localhost:8080/context-menu</runTarget>
                 </configuration>
                 <executions>
+                    <!-- You are free to mark this as permanently ignored
+                        in Eclipse -->
                     <execution>
+                        <configuration>
+                            <!-- if you don't specify any modules, the plugin
+                                will find them -->
+                        </configuration>
                         <goals>
                             <goal>resources</goal>
                             <goal>update-widgetset</goal>

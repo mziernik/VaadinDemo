@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet(urlPatterns = {"/ui", "/ui/*", "/VAADIN/*"}, asyncSupported = true)
-@VaadinServletConfiguration(productionMode = false, ui = MyVaadinUI.class)
+@WebServlet(urlPatterns = {"/", "/*", "/VAADIN/*"}, asyncSupported = true)
+@VaadinServletConfiguration(productionMode = false, ui = MyVaadinUI.class, widgetset = "WidgetSet")
 public class VServlet extends VaadinServlet {
 
     public VServlet() {
-        System.out.println("sdffgdfg");
+
     }
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 
         super.service(request, response);
     }
